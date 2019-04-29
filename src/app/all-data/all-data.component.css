@@ -1,0 +1,14 @@
+.padding_page{
+    padding: .5rem 1rem;
+}
+.padding_select{
+    padding-right: 20px;
+}
+.pagination{
+    margin: auto;
+    padding-top: 25px;
+    
+}
+.row{
+    padding-top: 25px;
+}

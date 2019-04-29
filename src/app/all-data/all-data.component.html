@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="col-3 padding_page">
+    <span class="padding_select">selectCity</span>
+   <select (change)="selectChangeHandler($event)">
+    <option value="MUMBAI">MUMBAI</option>
+    <option value="BALLIA">BALLIA</option>
+    <option value="DELHI">DELHI</option>
+    <option value="PUNE">PUNE</option>
+    <option value="NAGPUR">NAGPUR</option>
+    </select>
+</div>
+<div class="col-3 padding_page">
+    <span class="padding_select">itemsPerPage</span>
+    <select (change)="pageChangeHandler($event)">
+        <option *ngFor="let status_item of status_values">
+        {{status_item}}
+        </option>
+      </select>
+</div>
+<div class="col-6">
+<nav class="navbar">
+  <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="search by field">      
+</nav>
+</div>
+</div>
+<div class="row">
+<table class="table">
+  <thead>
+    <tr>
+      <th>ifsc</th>
+      <th>bank name</th>
+      <th>branch</th>
+      <th>address</th>
+      <th>district</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let a of all | filter:filter |paginate: { itemsPerPage: selectedPage, currentPage: p }; let i = index">
+      <td>{{a.ifsc}}</td>
+      <td>{{a.bank_name}}</td>
+      <td>{{a.branch}}</td>
+      <td>{{a.address}}</td>
+      <td>{{a.district}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="pagination">
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+</div>
