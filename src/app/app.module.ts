@@ -5,12 +5,14 @@ import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule }   from '@angular/forms';
 import { AllDataComponent } from './all-data/all-data.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Ng2SearchPipeModule } from 'ng2-search-filter'; //importing the module
 import {NgxPaginationModule} from 'ngx-pagination';
 
 
 import { HttpService } from './http.service';
+import { cacheInterceptor } from './cacheinterceptor';
+import { RequestCache } from './cache.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,11 @@ import { HttpService } from './http.service';
       {path:"**",component:AllDataComponent}   
     ])
   ],
-  providers: [HttpService],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: cacheInterceptor, multi: true },
+    HttpService , 
+    RequestCache
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
